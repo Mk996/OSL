@@ -1,13 +1,20 @@
 #!/usr/bin/perl
 use WWW::Mechanize;
+use FindBin qw($Bin);
 
 print "Enter website url(www.xyz.com):";
 $user_inp = <STDIN>;
+print "Enter folder name for storing:";
+chomp($fname = <STDIN>);
 print "Enter number of images you wanna download:";
 chomp($downlim = <STDIN>);
 
 $url = "http://$user_inp";
 $count = 1;
+my $folder = $fname;
+
+mkdir($folder) unless(-d $folder );
+chdir($folder) or die "can't chdir $folder\n";
 
 my $mechanize = WWW::Mechanize->new(autocheck => 1);
 
